@@ -16,7 +16,7 @@ from modules.styles import hide_sidebar_nav
 st.set_page_config(
     layout='wide',
     page_title='Regression Analysis - Car Price Prediction',
-    page_icon='🤖',
+    page_icon='',
     initial_sidebar_state='expanded'
 )
 
@@ -48,7 +48,7 @@ def main():
     Nav()
     hide_sidebar_nav()
     
-    st.title("🤖 Regression Analysis")
+    st.title(" Regression Analysis")
     st.markdown("Analisis model regresi untuk memprediksi harga mobil bekas dengan berbagai algoritma Machine Learning.")
     
     st.markdown("---")
@@ -60,15 +60,15 @@ def main():
     except:
         model_loaded = False
         comparison_df = None
-        st.warning("⚠️ Model belum di-train. Silakan jalankan notebook terlebih dahulu.")
+        st.warning(" Model belum di-train. Silakan jalankan notebook terlebih dahulu.")
     
     # ================================
     # SECTION 0: OVERVIEW
     # ================================
-    st.header("📚 Overview Analisis Regresi")
+    st.header(" Overview Analisis Regresi")
     
     st.markdown("""
-    ### 🎯 Tujuan Analisis
+    ### Tujuan Analisis
     
     Membangun model prediksi harga mobil bekas dengan pendekatan **Supervised Learning - Regression**.
     
@@ -79,10 +79,10 @@ def main():
     **Workflow Machine Learning:**
     
     ```
-    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-    │  1. Data Split  │ →  │  2. Train Model │ →  │  3. Evaluate    │ →  │  4. Select Best │
-    │   (80:20)       │    │   (4 Algorithms)│    │   (R², MAE, RMSE)│   │   (Grad Boosting)│
-    └─────────────────┘    └─────────────────┘    └─────────────────┘    └─────────────────┘
+                
+      1. Data Split → 2. Train Model → 3. Evaluate → 4. Select Best 
+       (80:20) (4 Algorithms) (R², MAE, RMSE) (Grad Boosting)
+                
     ```
     
     **Model yang Diuji:**
@@ -100,13 +100,13 @@ def main():
     # ================================
     # SECTION 1: REGRESSION THEORY
     # ================================
-    st.header("1️⃣ Teori Algoritma Regresi")
+    st.header("1⃣ Teori Algoritma Regresi")
     
     tab1, tab2, tab3, tab4 = st.tabs(["Linear Regression", "Decision Tree", "Random Forest", "Gradient Boosting"])
     
     with tab1:
         st.markdown("""
-        ### 📊 Linear Regression
+        ### Linear Regression
         
         **Konsep:**
         Model paling sederhana yang mencari hubungan linear antara fitur dan target.
@@ -150,12 +150,12 @@ def main():
         Price = -7048000 + 3500 * 2022 = $29,000
         ```
         
-        **✅ Kelebihan:**
+        ** Kelebihan:**
         - Sangat interpretable (setiap β menunjukkan pengaruh fitur)
         - Cepat dalam training (solusi closed-form)
         - Tidak memerlukan hyperparameter tuning
         
-        **❌ Kekurangan:**
+        ** Kekurangan:**
         - Hanya dapat menangkap hubungan linear
         - Sensitif terhadap outliers
         - Asumsi: independensi, normalitas residual
@@ -163,7 +163,7 @@ def main():
     
     with tab2:
         st.markdown("""
-        ### 🌳 Decision Tree Regressor
+        ### Decision Tree Regressor
         
         **Konsep:**
         Membagi data secara rekursif berdasarkan aturan if-else untuk membentuk tree structure.
@@ -186,12 +186,12 @@ def main():
         **Contoh Tree Structure:**
         ```
                     [Year > 2015?]
-                    /           \\
-                  Yes            No
-                  /               \\
-          [Mileage < 50K?]    [Mileage < 100K?]
-            /        \\           /        \\
-         $25,000   $18,000   $12,000    $8,000
+                    / \\
+                  Yes No
+                  / \\
+          [Mileage < 50K?] [Mileage < 100K?]
+            / \\ / \\
+         $25,000 $18,000 $12,000 $8,000
         ```
         
         **Hyperparameters:**
@@ -199,13 +199,13 @@ def main():
         - `min_samples_split`: minimum sample untuk split
         - `min_samples_leaf`: minimum sample di leaf
         
-        **✅ Kelebihan:**
+        ** Kelebihan:**
         - Dapat menangkap hubungan non-linear
         - Mudah divisualisasikan dan diinterpretasi
         - Tidak memerlukan feature scaling
         - Handle missing values baik
         
-        **❌ Kekurangan:**
+        ** Kekurangan:**
         - Mudah overfitting (perlu pruning)
         - Tidak stabil (variance tinggi)
         - Greedy algorithm (local optimum)
@@ -213,7 +213,7 @@ def main():
     
     with tab3:
         st.markdown("""
-        ### 🌲 Random Forest Regressor
+        ### Random Forest Regressor
         
         **Konsep:**
         Ensemble dari banyak Decision Trees dengan **Bagging** (Bootstrap Aggregating).
@@ -254,14 +254,14 @@ def main():
         
         Dimana $S_j^t$ = split menggunakan fitur j di tree t
         
-        **✅ Kelebihan:**
+        ** Kelebihan:**
         - Sangat powerful untuk data kompleks
         - Robust terhadap overfitting (bias-variance tradeoff)
         - Dapat mengukur feature importance
         - Handle high-dimensional data
         - Parallelizable (cepat)
         
-        **❌ Kekurangan:**
+        ** Kekurangan:**
         - Less interpretable dibanding single tree
         - Memory intensive
         - Slower inference untuk N besar
@@ -269,7 +269,7 @@ def main():
     
     with tab4:
         st.markdown("""
-        ### 🚀 Gradient Boosting Regressor
+        ### Gradient Boosting Regressor
         
         **Konsep:**
         Ensemble method yang membangun trees secara **sequential**, masing-masing memperbaiki error dari model sebelumnya.
@@ -284,11 +284,11 @@ def main():
         
         **Algoritma:**
         ```
-        1. Inisialisasi F₀(x) = mean(y)  # prediksi awal = rata-rata target
+        1. Inisialisasi F₀(x) = mean(y) # prediksi awal = rata-rata target
         
         2. For m = 1 to M (jumlah iterasi):
            a. Hitung pseudo-residual:
-              r_im = y_i - F_{m-1}(x_i)  # error saat ini
+              r_im = y_i - F_{m-1}(x_i) # error saat ini
            
            b. Fit regression tree h_m pada residual r_im
            
@@ -317,12 +317,12 @@ def main():
         - `max_depth`: biasanya shallow (3-5) untuk weak learners
         - `subsample`: fraction of samples per iteration
         
-        **✅ Kelebihan:**
+        ** Kelebihan:**
         - Performa state-of-the-art
         - Fleksibel dengan berbagai loss functions
         - Handle feature interactions
         
-        **❌ Kekurangan:**
+        ** Kekurangan:**
         - Sequential training (tidak parallelizable)
         - Sensitive to hyperparameters
         - Prone to overfitting if not tuned
@@ -333,10 +333,10 @@ def main():
     # ================================
     # SECTION 2: EVALUATION METRICS
     # ================================
-    st.header("2️⃣ Evaluation Metrics")
+    st.header("2⃣ Evaluation Metrics")
     
     st.markdown("""
-    ### 📐 Metrik untuk Mengukur Performa Model Regresi
+    ### Metrik untuk Mengukur Performa Model Regresi
     
     Setiap metrik memberikan perspektif berbeda tentang kualitas prediksi:
     """)
@@ -351,15 +351,15 @@ def main():
         
         **Contoh Perhitungan:**
         ```
-        Actual:    [20000, 25000, 30000]
+        Actual: [20000, 25000, 30000]
         Predicted: [21000, 24000, 28500]
-        Errors:    [1000,  1000,  1500]
+        Errors: [1000, 1000, 1500]
         
         MAE = (1000 + 1000 + 1500) / 3
         MAE = $1,166.67
         ```
         
-        **📊 Interpretasi:**
+        ** Interpretasi:**
         - Rata-rata error dalam satuan asli ($)
         - Mudah diinterpretasi oleh stakeholder
         - Robust terhadap outliers
@@ -374,16 +374,16 @@ def main():
         
         **Contoh Perhitungan:**
         ```
-        Actual:    [20000, 25000, 30000]
+        Actual: [20000, 25000, 30000]
         Predicted: [21000, 24000, 28500]
-        Errors²:   [1M,    1M,    2.25M]
+        Errors²: [1M, 1M, 2.25M]
         
         MSE = (1M + 1M + 2.25M) / 3
         MSE = 1,416,667
         RMSE = √1,416,667 = $1,190.24
         ```
         
-        **📊 Interpretasi:**
+        ** Interpretasi:**
         - Penalti lebih besar untuk error besar
         - Dalam satuan asli ($)
         - Sensitif terhadap outliers
@@ -410,7 +410,7 @@ def main():
         R² = 1 - 0.085 = 0.915 (91.5%)
         ```
         
-        **📊 Interpretasi:**
+        ** Interpretasi:**
         - Proporsi variance yang dijelaskan
         - Range: 0 - 1 (1 = perfect)
         - 0 = sama dengan prediksi mean
@@ -418,7 +418,7 @@ def main():
         """)
     
     st.markdown("""
-    ### 📋 Perbandingan Metrik
+    ### Perbandingan Metrik
     
     | Metrik | Formula | Range | Interpretasi |
     |--------|---------|-------|--------------|
@@ -437,16 +437,16 @@ def main():
     # ================================
     # SECTION 3: MODEL COMPARISON
     # ================================
-    st.header("3️⃣ Perbandingan Model")
+    st.header("3⃣ Perbandingan Model")
     
     st.markdown("""
-    ### 🔬 Metodologi Training
+    ### Metodologi Training
     
     **Train-Test Split:**
     ```
     Total Data: 47,339 records
-    ├── Training Set (80%): 37,871 records → untuk training model
-    └── Test Set (20%): 9,468 records → untuk evaluasi (unseen data)
+     Training Set (80%): 37,871 records → untuk training model
+     Test Set (20%): 9,468 records → untuk evaluasi (unseen data)
     ```
     
     **Strategi:**
@@ -473,7 +473,7 @@ def main():
             'R² Score': [0, 0, 0, 0],
             'Training Time': ['N/A', 'N/A', 'N/A', 'N/A']
         })
-        st.warning("⚠️ Data model comparison belum tersedia. Jalankan notebook untuk generate data.")
+        st.warning(" Data model comparison belum tersedia. Jalankan notebook untuk generate data.")
     
     st.dataframe(models_comparison.style.highlight_max(subset=['R² Score']).highlight_min(subset=['MAE ($)', 'RMSE ($)']), 
                  use_container_width=True)
@@ -498,9 +498,9 @@ def main():
         st.pyplot(fig)
         
         st.markdown("""
-        **📊 Interpretasi R² Score:**
+        ** Interpretasi R² Score:**
         
-        - **Gradient Boosting (0.9695)**: Menjelaskan 96.95% variasi harga ⭐
+        - **Gradient Boosting (0.9695)**: Menjelaskan 96.95% variasi harga 
         - **Decision Tree (0.9545)**: Single tree sudah cukup kuat
         - **Linear Regression (0.8744)**: Baseline, hubungan non-linear tidak tertangkap
         
@@ -522,7 +522,7 @@ def main():
         st.pyplot(fig)
         
         st.markdown("""
-        **📊 Interpretasi Error Metrics:**
+        ** Interpretasi Error Metrics:**
         
         - **Gradient Boosting**: MAE $1,174 → Error rata-rata ~5.9% (sangat baik!)
         - **RMSE selalu > MAE**: Menunjukkan ada beberapa error yang lebih besar
@@ -532,20 +532,20 @@ def main():
         """)
     
     st.success("""
-    ### 🏆 Model Terbaik: Gradient Boosting
+    ### Model Terbaik: Gradient Boosting
     
     | Kriteria | Nilai | Interpretasi |
     |----------|-------|------------|
     | **R² Score** | 0.9695 | 96.95% variance explained |
     | **MAE** | $1,174 | Error rata-rata ~5.9% |
     | **RMSE** | ~$1,800 | Error besar jarang |
-    | **File Size** | 0.13 MB | ✅ Sangat kecil, production-ready |
+    | **File Size** | 0.13 MB | Sangat kecil, production-ready |
     
     **Mengapa Gradient Boosting Terpilih?**
-    1. ✅ R² sangat tinggi → prediksi sangat akurat (96.95%)
-    2. ✅ MAE rendah → error konsisten < $1,200
-    3. ✅ File size kecil → 0.13 MB (vs Random Forest 328 MB)
-    4. ✅ Sequential learning → optimal untuk regression
+    1. R² sangat tinggi → prediksi sangat akurat (96.95%)
+    2. MAE rendah → error konsisten < $1,200
+    3. File size kecil → 0.13 MB (vs Random Forest 328 MB)
+    4. Sequential learning → optimal untuk regression
     """)
     
     st.markdown("---")
@@ -553,10 +553,10 @@ def main():
     # ================================
     # SECTION 4: FEATURE IMPORTANCE
     # ================================
-    st.header("4️⃣ Feature Importance Analysis")
+    st.header("4⃣ Feature Importance Analysis")
     
     st.markdown("""
-    ### 📐 Cara Menghitung Feature Importance (Gradient Boosting)
+    ### Cara Menghitung Feature Importance (Gradient Boosting)
     
     **Metode: Gain-based Importance**
     
@@ -596,7 +596,7 @@ def main():
             st.pyplot(fig)
         
         with col2:
-            st.markdown("### 🏆 Top 5 Features")
+            st.markdown("### Top 5 Features")
             for rank, (_, row) in enumerate(feature_importance.head(5).iterrows(), 1):
                 pct = row['Importance'] * 100
                 st.markdown(f"""
@@ -607,7 +607,7 @@ def main():
             st.markdown("---")
             
             st.markdown("""
-            ### 💡 Interpretasi Bisnis
+            ### Interpretasi Bisnis
             
             **Year of Manufacture** paling penting karena:
             - Langsung mempengaruhi depresiasi
@@ -629,7 +629,7 @@ def main():
     # ================================
     # SECTION 5: MODEL PERFORMANCE
     # ================================
-    st.header("5️⃣ Model Performance Summary")
+    st.header("5⃣ Model Performance Summary")
     
     if model_loaded:
         col1, col2, col3 = st.columns(3)
@@ -642,7 +642,7 @@ def main():
             st.metric("R² Score", f"{metrics['r2_score']:.4f}", help="Coefficient of Determination")
         
         st.markdown(f"""
-        ### 📊 Interpretasi Performance Model
+        ### Interpretasi Performance Model
         
         | Metrik | Nilai | Interpretasi |
         |--------|-------|--------------|
@@ -666,10 +666,10 @@ def main():
     # ================================
     # SECTION 6: CONCLUSION
     # ================================
-    st.header("📋 Kesimpulan Regression Analysis")
+    st.header(" Kesimpulan Regression Analysis")
     
     st.success("""
-    ### ✅ Key Findings
+    ### Key Findings
     
     **1. Model Selection:**
     - Gradient Boosting adalah model terbaik dengan R² = 0.9695
@@ -693,9 +693,9 @@ def main():
     """)
     
     st.info("""
-    **💡 Next Steps:**
+    ** Next Steps:**
     
-    Lanjutkan ke halaman **🔮 Prediction** untuk:
+    Lanjutkan ke halaman ** Prediction** untuk:
     1. Input spesifikasi mobil
     2. Dapatkan estimasi harga
     3. Lihat confidence interval

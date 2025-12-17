@@ -15,7 +15,7 @@ from modules.styles import hide_sidebar_nav
 st.set_page_config(
     layout='wide',
     page_title='EDA - Car Price Prediction',
-    page_icon='📊',
+    page_icon='',
     initial_sidebar_state='expanded'
 )
 
@@ -31,7 +31,7 @@ def main():
     Nav()
     hide_sidebar_nav()
     
-    st.title("📊 Exploratory Data Analysis")
+    st.title(" Exploratory Data Analysis")
     st.markdown("Analisis eksplorasi untuk memahami pola, distribusi, dan hubungan antar variabel dalam dataset mobil bekas.")
     
     st.markdown("---")
@@ -42,7 +42,7 @@ def main():
     # ================================
     # DATASET OVERVIEW
     # ================================
-    st.header("📋 Overview Dataset")
+    st.header(" Overview Dataset")
     
     col1, col2, col3, col4 = st.columns(4)
     
@@ -57,7 +57,7 @@ def main():
     
     # Markdown penjelasan dataset
     st.markdown("""
-    ### 📝 Penjelasan Dataset
+    ### Penjelasan Dataset
     
     Dataset **Second-Hand Cars** berisi informasi penjualan mobil bekas dengan karakteristik sebagai berikut:
     
@@ -69,26 +69,26 @@ def main():
     | **Target Variable** | Price (Harga jual dalam USD) |
     
     **Mengapa dataset ini penting?**
-    - 🚗 Pasar mobil bekas adalah industri bernilai miliaran dollar
-    - 📊 Data cukup besar untuk membangun model ML yang reliable
-    - 🎯 Memiliki variasi fitur yang representatif untuk prediksi harga
+    - Pasar mobil bekas adalah industri bernilai miliaran dollar
+    - Data cukup besar untuk membangun model ML yang reliable
+    - Memiliki variasi fitur yang representatif untuk prediksi harga
     """)
     
     st.markdown("---")
     
     # Sample Data
-    st.subheader("📝 Sample Data (10 Records Pertama)")
+    st.subheader(" Sample Data (10 Records Pertama)")
     st.dataframe(df.head(10), use_container_width=True)
     
     st.info("""
-    **💡 Observasi Awal:**
+    ** Observasi Awal:**
     - Dataset memiliki kombinasi fitur numerik (Engine size, Year, Mileage, Price) dan kategorikal (Manufacturer, Model, Fuel type)
     - Setiap row merepresentasikan satu transaksi mobil bekas yang unik
     - Price bervariasi dari ratusan hingga puluhan ribu dollar
     """)
     
     # Columns info
-    st.subheader("📊 Informasi Kolom Dataset")
+    st.subheader(" Informasi Kolom Dataset")
     col_info = pd.DataFrame({
         'Column': df.columns,
         'Data Type': df.dtypes.values,
@@ -99,7 +99,7 @@ def main():
     st.dataframe(col_info, use_container_width=True)
     
     st.markdown("""
-    ### 🔍 Interpretasi Informasi Kolom
+    ### Interpretasi Informasi Kolom
     
     | Kolom | Tipe | Interpretasi Bisnis |
     |-------|------|---------------------|
@@ -111,7 +111,7 @@ def main():
     | **Mileage** | Integer | Jarak tempuh (mil) - indikator kondisi & penggunaan |
     | **Price** | Integer | **Target variable** - harga jual dalam USD |
     
-    **✅ Data Quality Check:**
+    ** Data Quality Check:**
     - Tidak ada missing values (0% null) → Data siap untuk analisis
     - Semua kolom memiliki tipe data yang sesuai
     - Unique values menunjukkan variasi data yang baik
@@ -122,7 +122,7 @@ def main():
     # ================================
     # DESCRIPTIVE STATISTICS
     # ================================
-    st.header("📈 Statistik Deskriptif")
+    st.header(" Statistik Deskriptif")
     st.dataframe(df.describe(), use_container_width=True)
     
     # Detailed interpretation
@@ -130,7 +130,7 @@ def main():
     
     with col1:
         st.markdown("""
-        ### 📊 Interpretasi Statistik Numerik
+        ### Interpretasi Statistik Numerik
         
         **Engine Size (Kapasitas Mesin):**
         - Mean: ~2.5 L, Range: 0.6 - 6.6 L
@@ -145,7 +145,7 @@ def main():
     
     with col2:
         st.markdown("""
-        ### 📊 Interpretasi Statistik Numerik (lanjutan)
+        ### Interpretasi Statistik Numerik (lanjutan)
         
         **Mileage (Jarak Tempuh):**
         - Mean: ~100K mil, Max: 300K+ mil
@@ -159,7 +159,7 @@ def main():
         """)
     
     st.warning("""
-    **⚠️ Catatan Penting:**
+    ** Catatan Penting:**
     
     Perbedaan Mean dan Median pada Price menunjukkan distribusi **right-skewed**:
     - Mean ($15K) > Median ($12K) → ada mobil-mobil mahal yang menarik rata-rata ke atas
@@ -172,7 +172,7 @@ def main():
     # ================================
     # PRICE DISTRIBUTION
     # ================================
-    st.header("💰 Distribusi Harga Mobil Bekas")
+    st.header(" Distribusi Harga Mobil Bekas")
     
     # Load saved image
     try:
@@ -203,7 +203,7 @@ def main():
     
     with col1:
         st.markdown("""
-        ### 📊 Analisis Histogram (Kiri)
+        ### Analisis Histogram (Kiri)
         
         **Observasi:**
         1. **Distribusi Right-Skewed** - Ekor panjang ke kanan
@@ -214,12 +214,12 @@ def main():
         
         $$\\text{Skewness} = \\frac{\\sum(x_i - \\bar{x})^3}{n \\cdot s^3}$$
         
-        Jika Skewness > 0 → Right-skewed ✓
+        Jika Skewness > 0 → Right-skewed 
         """)
     
     with col2:
         st.markdown("""
-        ### 📦 Analisis Boxplot (Kanan)
+        ### Analisis Boxplot (Kanan)
         
         **Komponen Boxplot:**
         - **Box**: Q1 (25%) sampai Q3 (75%)
@@ -236,7 +236,7 @@ def main():
         """)
     
     st.success("""
-    ### 💡 Insight Distribusi Harga
+    ### Insight Distribusi Harga
     
     | Aspek | Nilai | Interpretasi Bisnis |
     |-------|-------|---------------------|
@@ -246,9 +246,9 @@ def main():
     | **Outliers** | >$50K | Mobil premium (BMW, Porsche, dll) |
     
     **Strategi untuk Dealer:**
-    - 🎯 **Volume focus**: Mobil $8K-$20K untuk turnover cepat
-    - 💎 **Premium focus**: Mobil >$30K untuk margin tinggi
-    - ⚠️ **Avoid**: Mobil <$3K (mungkin rusak/salvage)
+    - **Volume focus**: Mobil $8K-$20K untuk turnover cepat
+    - **Premium focus**: Mobil >$30K untuk margin tinggi
+    - **Avoid**: Mobil <$3K (mungkin rusak/salvage)
     """)
     
     st.markdown("---")
@@ -256,12 +256,12 @@ def main():
     # ================================
     # CATEGORICAL ANALYSIS
     # ================================
-    st.header("🏭 Analisis Variabel Kategorikal")
+    st.header(" Analisis Variabel Kategorikal")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("🚗 Top 10 Manufacturer")
+        st.subheader(" Top 10 Manufacturer")
         try:
             st.image("images/top_manufacturers.png", use_container_width=True)
         except:
@@ -277,7 +277,7 @@ def main():
             st.pyplot(fig)
         
         st.markdown("""
-        **📊 Interpretasi Top Manufacturer:**
+        ** Interpretasi Top Manufacturer:**
         
         | Tier | Brands | Karakteristik |
         |------|--------|---------------|
@@ -292,7 +292,7 @@ def main():
         """)
     
     with col2:
-        st.subheader("⛽ Distribusi Fuel Type")
+        st.subheader(" Distribusi Fuel Type")
         try:
             st.image("images/fuel_type_distribution.png", use_container_width=True)
         except:
@@ -305,7 +305,7 @@ def main():
             st.pyplot(fig)
         
         st.markdown("""
-        **⛽ Interpretasi Fuel Type Distribution:**
+        ** Interpretasi Fuel Type Distribution:**
         
         | Fuel Type | Market Share | Trend |
         |-----------|--------------|-------|
@@ -314,9 +314,9 @@ def main():
         | **Hybrid** | ~20% | Segmen berkembang, higher resale |
         
         **Insight Bisnis:**
-        - 🌱 **Hybrid retain value lebih baik** (eco-conscious buyers)
-        - ⛽ Diesel mungkin turun (regulasi emisi ketat)
-        - ⚡ Electric belum termasuk (data mungkin agak lama)
+        - **Hybrid retain value lebih baik** (eco-conscious buyers)
+        - Diesel mungkin turun (regulasi emisi ketat)
+        - Electric belum termasuk (data mungkin agak lama)
         """)
     
     st.markdown("---")
@@ -324,7 +324,7 @@ def main():
     # ================================
     # CORRELATION ANALYSIS
     # ================================
-    st.header("🔗 Analisis Korelasi Antar Variabel")
+    st.header(" Analisis Korelasi Antar Variabel")
     
     numeric_cols = ['Engine size', 'Year of manufacture', 'Mileage', 'Price']
     correlation = df[numeric_cols].corr()
@@ -344,7 +344,7 @@ def main():
     
     with col2:
         st.markdown("""
-        ### 📐 Rumus Korelasi Pearson
+        ### Rumus Korelasi Pearson
         
         $$r = \\frac{\\sum(x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum(x_i - \\bar{x})^2}\\sqrt{\\sum(y_i - \\bar{y})^2}}$$
         
@@ -357,7 +357,7 @@ def main():
         """)
     
     st.markdown("""
-    ### 📊 Interpretasi Correlation Matrix
+    ### Interpretasi Correlation Matrix
     
     | Variabel | Korelasi dengan Price | Strength | Interpretasi |
     |----------|----------------------|----------|--------------|
@@ -365,12 +365,12 @@ def main():
     | **Mileage** | **-0.60** | 🟡 Moderate | Mileage tinggi = harga rendah |
     | **Engine size** | **+0.30** | 🟠 Weak | Mesin besar sedikit lebih mahal |
     
-    **⚠️ Multikolinearitas yang Ditemukan:**
+    ** Multikolinearitas yang Ditemukan:**
     - Year dan Mileage berkorelasi negatif (-0.45)
     - Mobil baru → mileage rendah (makes sense)
     - Implikasi: Hati-hati dengan linear regression (coefficient tidak stabil)
     
-    **💡 Key Insight:**
+    ** Key Insight:**
     - **Tahun produksi adalah faktor #1** dalam menentukan harga
     - Depresiasi tahunan sangat jelas terlihat dalam data
     - Engine size kurang berpengaruh karena preferensi bervariasi (fuel efficiency vs power)
@@ -381,7 +381,7 @@ def main():
     # ================================
     # SCATTER PLOTS
     # ================================
-    st.header("📈 Scatter Plots - Hubungan Visual dengan Harga")
+    st.header(" Scatter Plots - Hubungan Visual dengan Harga")
     
     try:
         st.image("images/scatter_plots.png", use_container_width=True)
@@ -424,10 +424,10 @@ def main():
     
     with col1:
         st.markdown("""
-        ### 📈 Price vs Year of Manufacture (Kiri Atas)
+        ### Price vs Year of Manufacture (Kiri Atas)
         
         **Observasi:**
-        - Tren positif yang jelas ↗️
+        - Tren positif yang jelas ↗
         - Mobil tahun baru (>2015) = harga tinggi ($20K+)
         - Mobil tua (<2000) = harga rendah (<$5K)
         
@@ -435,7 +435,7 @@ def main():
         ```
         Tahun 1-3: Depresiasi cepat (~15%/tahun)
         Tahun 3-7: Depresiasi sedang (~10%/tahun)
-        Tahun 7+:  Depresiasi lambat (~5%/tahun)
+        Tahun 7+: Depresiasi lambat (~5%/tahun)
         Tahun 15+: Plateau (mobil klasik bisa naik)
         ```
         
@@ -446,7 +446,7 @@ def main():
         """)
         
         st.markdown("""
-        ### 🔧 Price vs Engine Size (Kiri Bawah)
+        ### Price vs Engine Size (Kiri Bawah)
         
         **Observasi:**
         - Hubungan tidak linear → ada "sweet spots"
@@ -464,20 +464,20 @@ def main():
     
     with col2:
         st.markdown("""
-        ### 🛣️ Price vs Mileage (Kanan Atas)
+        ### Price vs Mileage (Kanan Atas)
         
         **Observasi:**
-        - Tren negatif yang jelas ↘️
+        - Tren negatif yang jelas ↘
         - Low mileage (<30K) = premium tinggi
         - High mileage (>150K) = harga plateau
         
         **Threshold Penting:**
         ```
-        <30K mil:  Premium +20-30%
-        30-70K:    Normal pricing
-        70-100K:   Discount -10-20%
-        100-150K:  Significant discount -30%
-        >150K:     Plateau (harga sudah sangat rendah)
+        <30K mil: Premium +20-30%
+        30-70K: Normal pricing
+        70-100K: Discount -10-20%
+        100-150K: Significant discount -30%
+        >150K: Plateau (harga sudah sangat rendah)
         ```
         
         **Formula Mileage Adjustment:**
@@ -485,7 +485,7 @@ def main():
         """)
         
         st.markdown("""
-        ### ⛽ Price by Fuel Type (Kanan Bawah)
+        ### Price by Fuel Type (Kanan Bawah)
         
         **Observasi dari Boxplot:**
         - **Hybrid**: Median tertinggi, IQR terkecil
@@ -505,22 +505,22 @@ def main():
     # ================================
     # CONCLUSIONS
     # ================================
-    st.header("📋 Kesimpulan EDA")
+    st.header(" Kesimpulan EDA")
     
     st.success("""
-    ### ✅ Key Findings dari Exploratory Data Analysis
+    ### Key Findings dari Exploratory Data Analysis
     
     #### 1. Data Quality
-    - ✅ Tidak ada missing values (0% null)
-    - ✅ Tidak ada duplikat signifikan
-    - ⚠️ Outliers terdeteksi pada Price (perlu handling)
+    - Tidak ada missing values (0% null)
+    - Tidak ada duplikat signifikan
+    - Outliers terdeteksi pada Price (perlu handling)
     
     #### 2. Faktor Penentu Harga (berdasarkan korelasi)
     | Rank | Faktor | Korelasi | Importance |
     |------|--------|----------|------------|
-    | 🥇 | Year of Manufacture | +0.80 | **HIGHEST** |
-    | 🥈 | Mileage | -0.60 | HIGH |
-    | 🥉 | Engine Size | +0.30 | MODERATE |
+    | | Year of Manufacture | +0.80 | **HIGHEST** |
+    | | Mileage | -0.60 | HIGH |
+    | | Engine Size | +0.30 | MODERATE |
     | 4 | Fuel Type | - | CATEGORICAL |
     | 5 | Manufacturer | - | CATEGORICAL |
     
@@ -530,15 +530,15 @@ def main():
     - Mileage: Normal distribution with right tail
     
     #### 4. Rekomendasi untuk Modeling
-    - 📊 **Feature Engineering**: Car_Age, Mileage_per_Year
-    - 🧹 **Preprocessing**: Remove outliers dari Price
-    - 🔄 **Encoding**: One-Hot untuk Manufacturer, Label untuk Fuel
-    - ⚖️ **Scaling**: StandardScaler untuk numerical features
-    - 🤖 **Model**: Tree-based (Random Forest) untuk non-linearity
+    - **Feature Engineering**: Car_Age, Mileage_per_Year
+    - **Preprocessing**: Remove outliers dari Price
+    - **Encoding**: One-Hot untuk Manufacturer, Label untuk Fuel
+    - **Scaling**: StandardScaler untuk numerical features
+    - **Model**: Tree-based (Random Forest) untuk non-linearity
     """)
     
     st.info("""
-    **💡 Next Steps:**
+    ** Next Steps:**
     
     Lanjutkan ke halaman **Preprocessing** untuk melihat:
     1. Handling outliers dengan metode IQR

@@ -14,7 +14,7 @@ from modules.styles import hide_sidebar_nav
 st.set_page_config(
     layout='wide',
     page_title='Price Prediction - Car Price Prediction',
-    page_icon='🔮',
+    page_icon='',
     initial_sidebar_state='expanded'
 )
 
@@ -51,17 +51,17 @@ def predict_price(model, scaler, le_fuel, feature_cols, top_manufacturers,
     
     # Engine category
     if engine_size < 1.5:
-        engine_category = 0  # Small
+        engine_category = 0 # Small
     elif engine_size < 2.5:
-        engine_category = 1  # Medium
+        engine_category = 1 # Medium
     else:
-        engine_category = 2  # Large
+        engine_category = 2 # Large
     
     # Fuel type encoding
     try:
         fuel_encoded = le_fuel.transform([fuel_type])[0]
     except:
-        fuel_encoded = 0  # Default if unknown
+        fuel_encoded = 0 # Default if unknown
     
     # Create feature dictionary
     features = {
@@ -108,14 +108,14 @@ def predict_price(model, scaler, le_fuel, feature_cols, top_manufacturers,
     # Make prediction
     prediction = model.predict(input_df)[0]
     
-    return max(0, prediction)  # Ensure non-negative price
+    return max(0, prediction) # Ensure non-negative price
 
 
 def main():
     Nav()
     hide_sidebar_nav()
     
-    st.title("🔮 Car Price Prediction")
+    st.title(" Car Price Prediction")
     st.markdown("Prediksi harga mobil bekas berdasarkan spesifikasi menggunakan model **Gradient Boosting** yang telah di-training.")
     
     st.markdown("---")
@@ -126,25 +126,25 @@ def main():
         models_loaded = True
     except Exception as e:
         models_loaded = False
-        st.error(f"❌ Error loading models: {str(e)}")
+        st.error(f" Error loading models: {str(e)}")
         st.warning("Silakan jalankan notebook app.ipynb terlebih dahulu untuk membuat model.")
         return
     
     # ================================
     # SECTION 1: HOW IT WORKS
     # ================================
-    st.header("📚 Cara Kerja Prediksi")
+    st.header(" Cara Kerja Prediksi")
     
-    with st.expander("🔍 Lihat Detail Proses Prediksi", expanded=False):
+    with st.expander(" Lihat Detail Proses Prediksi", expanded=False):
         st.markdown("""
-        ### 🔄 Pipeline Prediksi
+        ### Pipeline Prediksi
         
         ```
-        ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-        │  1. Input User   │ →   │  2. Feature      │ →   │  3. Scaling      │ →   │  4. Prediction   │
-        │  (Year, Mileage, │     │  Engineering     │     │  (StandardScaler)│     │  (Grad Boosting) │
-        │  Engine, etc.)   │     │  (Age, MPY, etc.)│     │                  │     │                  │
-        └──────────────────┘     └──────────────────┘     └──────────────────┘     └──────────────────┘
+                       
+          1. Input User → 2. Feature → 3. Scaling → 4. Prediction 
+          (Year, Mileage, Engineering (StandardScaler) (Grad Boosting) 
+          Engine, etc.) (Age, MPY, etc.) 
+                       
         ```
         
         **Step 1: Input User**
@@ -176,7 +176,7 @@ def main():
     # ================================
     # MODEL INFO
     # ================================
-    st.header("📊 Model Information")
+    st.header(" Model Information")
     
     col1, col2, col3, col4 = st.columns(4)
     
@@ -190,7 +190,7 @@ def main():
         st.metric("Features", f"{len(feature_cols)}", help="Jumlah fitur input")
     
     st.markdown("""
-    **📋 Interpretasi Model:**
+    ** Interpretasi Model:**
     
     | Metrik | Nilai | Artinya |
     |--------|-------|---------|
@@ -204,28 +204,28 @@ def main():
     # ================================
     # INPUT FORM
     # ================================
-    st.header("🚗 Masukkan Spesifikasi Mobil")
+    st.header(" Masukkan Spesifikasi Mobil")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("📋 Informasi Dasar")
+        st.subheader(" Informasi Dasar")
         
         # Manufacturer selection
         manufacturer_options = list(top_manufacturers) + ['Other']
         manufacturer = st.selectbox(
-            "🏭 Manufacturer",
+            " Manufacturer",
             options=manufacturer_options,
             help="Pilih manufacturer mobil. Jika tidak ada, pilih 'Other'"
         )
         
         st.markdown("""
-        <small>💡 <i>Top 10 manufacturers berdasarkan volume penjualan tertinggi dalam dataset.</i></small>
+        <small> <i>Top 10 manufacturers berdasarkan volume penjualan tertinggi dalam dataset.</i></small>
         """, unsafe_allow_html=True)
         
         # Year of manufacture
         year = st.slider(
-            "📅 Year of Manufacture",
+            " Year of Manufacture",
             min_value=1990,
             max_value=2024,
             value=2018,
@@ -237,14 +237,14 @@ def main():
         car_age = current_year - year
         
         st.markdown(f"""
-        **📊 Derived Features:**
+        ** Derived Features:**
         - **Car Age**: {car_age} tahun
         - **Depreciation Factor**: {"Tinggi" if car_age > 10 else "Sedang" if car_age > 5 else "Rendah"}
         """)
         
         # Engine size
         engine_size = st.number_input(
-            "⚙️ Engine Size (Liters)",
+            " Engine Size (Liters)",
             min_value=0.5,
             max_value=8.0,
             value=2.0,
@@ -256,18 +256,18 @@ def main():
         st.markdown(f"**Engine Category**: {engine_cat}")
     
     with col2:
-        st.subheader("📋 Detail Tambahan")
+        st.subheader(" Detail Tambahan")
         
         # Fuel type
         fuel_types = list(le_fuel.classes_)
         fuel_type = st.selectbox(
-            "⛽ Fuel Type",
+            " Fuel Type",
             options=fuel_types,
             help="Jenis bahan bakar mobil"
         )
         
         st.markdown("""
-        **💡 Info Fuel Type:**
+        ** Info Fuel Type:**
         - **Petrol**: Paling umum, efisien untuk jarak pendek
         - **Diesel**: Efisien untuk jarak jauh, torsi tinggi
         - **Hybrid**: Kombinasi listrik & bensin, premium price
@@ -275,7 +275,7 @@ def main():
         
         # Mileage
         mileage = st.number_input(
-            "🛣️ Mileage (miles)",
+            " Mileage (miles)",
             min_value=0,
             max_value=500000,
             value=50000,
@@ -287,14 +287,14 @@ def main():
         mileage_per_year = mileage / (car_age + 1) if car_age >= 0 else mileage
         
         st.markdown(f"""
-        **📊 Mileage Analysis:**
+        ** Mileage Analysis:**
         - **Total Mileage**: {mileage:,} miles
         - **Per Year**: {mileage_per_year:,.0f} miles/year
         - **Usage**: {"Light" if mileage_per_year < 8000 else "Normal" if mileage_per_year < 15000 else "Heavy" if mileage_per_year < 25000 else "Very Heavy"}
         """)
         
         st.info("""
-        **📌 Standar Industri:**
+        ** Standar Industri:**
         - < 10,000 miles/year = Light use
         - 10,000 - 15,000 miles/year = Normal
         - > 20,000 miles/year = Heavy use (commercial/rental)
@@ -308,10 +308,10 @@ def main():
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
-        predict_button = st.button("🔮 Predict Price", type="primary", use_container_width=True)
+        predict_button = st.button(" Predict Price", type="primary", use_container_width=True)
     
     if predict_button:
-        with st.spinner("🔄 Calculating prediction using Gradient Boosting model..."):
+        with st.spinner(" Calculating prediction using Gradient Boosting model..."):
             # Make prediction
             predicted_price = predict_price(
                 model, scaler, le_fuel, feature_cols, top_manufacturers,
@@ -323,7 +323,7 @@ def main():
         # ================================
         # PREDICTION RESULT
         # ================================
-        st.header("💰 Hasil Prediksi")
+        st.header(" Hasil Prediksi")
         
         col1, col2, col3 = st.columns([1, 2, 1])
         
@@ -353,13 +353,13 @@ def main():
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            st.metric("📉 Conservative Estimate", f"${lower_bound:,.2f}", 
+            st.metric(" Conservative Estimate", f"${lower_bound:,.2f}", 
                      help="Batas bawah estimasi (Predicted - MAE)")
         with col2:
-            st.metric("📊 Best Estimate", f"${predicted_price:,.2f}",
+            st.metric(" Best Estimate", f"${predicted_price:,.2f}",
                      help="Prediksi terbaik dari model")
         with col3:
-            st.metric("📈 Optimistic Estimate", f"${upper_bound:,.2f}",
+            st.metric(" Optimistic Estimate", f"${upper_bound:,.2f}",
                      help="Batas atas estimasi (Predicted + MAE)")
         
         st.markdown("---")
@@ -367,7 +367,7 @@ def main():
         # ================================
         # CONFIDENCE INTERVAL
         # ================================
-        st.subheader("📐 Confidence Interval")
+        st.subheader(" Confidence Interval")
         
         st.markdown(f"""
         **Formula Confidence Interval:**
@@ -386,16 +386,16 @@ def main():
         | **68% (±1 MAE)** | ${lower_bound:,.2f} - ${upper_bound:,.2f} | Kemungkinan besar harga aktual |
         | **95% (±2 MAE)** | ${lower_2sigma:,.2f} - ${upper_2sigma:,.2f} | Hampir pasti dalam range ini |
         
-        **📊 Visualisasi:**
+        ** Visualisasi:**
         ```
-        $0     ${lower_2sigma:,.0f}   ${lower_bound:,.0f}   ${predicted_price:,.0f}   ${upper_bound:,.0f}   ${upper_2sigma:,.0f}
+        $0 ${lower_2sigma:,.0f} ${lower_bound:,.0f} ${predicted_price:,.0f} ${upper_bound:,.0f} ${upper_2sigma:,.0f}
         |--------|---------|========|=========|========|---------|
-                 |   95%   |   68%  |  BEST   |   68%  |   95%   |
+                 | 95% | 68% | BEST | 68% | 95% |
         ```
         """)
         
         st.info(f"""
-        **💡 Interpretasi Praktis:**
+        ** Interpretasi Praktis:**
         
         Berdasarkan model dengan **R² = {metrics['r2_score']:.4f}** ({metrics['r2_score']*100:.2f}% accuracy):
         
@@ -404,8 +404,8 @@ def main():
         - **Wide Range (95%)**: ${lower_2sigma:,.2f} - ${upper_2sigma:,.2f}
         
         **Rekomendasi:**
-        - 🛒 **Jika membeli**: Tawar di bawah ${predicted_price:,.2f}
-        - 💰 **Jika menjual**: Listing di ${predicted_price:,.2f} - ${upper_bound:,.2f}
+        - **Jika membeli**: Tawar di bawah ${predicted_price:,.2f}
+        - **Jika menjual**: Listing di ${predicted_price:,.2f} - ${upper_bound:,.2f}
         """)
         
         st.markdown("---")
@@ -413,13 +413,13 @@ def main():
         # ================================
         # FEATURE CONTRIBUTION
         # ================================
-        st.subheader("📊 Faktor yang Mempengaruhi Harga")
+        st.subheader(" Faktor yang Mempengaruhi Harga")
         
         col1, col2 = st.columns(2)
         
         with col1:
             st.markdown(f"""
-            **🔢 Input yang Anda Masukkan:**
+            ** Input yang Anda Masukkan:**
             
             | Spesifikasi | Nilai | Impact |
             |-------------|-------|--------|
@@ -434,7 +434,7 @@ def main():
         
         with col2:
             st.markdown("""
-            **📈 Feature Importance (dari model):**
+            ** Feature Importance (dari model):**
             
             Berdasarkan analisis Gradient Boosting:
             
@@ -464,7 +464,7 @@ def main():
         # ================================
         # INPUT SUMMARY
         # ================================
-        st.subheader("📋 Summary Input")
+        st.subheader(" Summary Input")
         
         summary_data = {
             'Spesifikasi': ['Manufacturer', 'Year of Manufacture', 'Engine Size', 
@@ -484,15 +484,15 @@ def main():
     # ================================
     # TIPS & INSIGHTS
     # ================================
-    st.header("💡 Tips & Insights untuk Pengguna")
+    st.header(" Tips & Insights untuk Pengguna")
     
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown("""
-        ### 🔍 Faktor Utama Harga Mobil Bekas
+        ### Faktor Utama Harga Mobil Bekas
         
-        **1. Year of Manufacture** 🏆
+        **1. Year of Manufacture** 
         - Faktor #1 penentu harga
         - Depresiasi ~15-20% per tahun di awal
         - Mobil > 10 tahun = depresiasi melambat
@@ -517,15 +517,15 @@ def main():
     
     with col2:
         st.markdown("""
-        ### 📊 Cara Menggunakan Prediksi Ini
+        ### Cara Menggunakan Prediksi Ini
         
-        **✅ Gunakan sebagai:**
+        ** Gunakan sebagai:**
         1. **Referensi awal** saat negosiasi
         2. **Benchmark** untuk compare listings
         3. **Validation** harga yang diminta seller
         4. **Starting point** untuk research lebih lanjut
         
-        **⚠️ Pertimbangkan juga (tidak dalam model):**
+        ** Pertimbangkan juga (tidak dalam model):**
         1. **Kondisi fisik** mobil (exterior/interior)
         2. **Service history** & maintenance records
         3. **Accident history** (clean title?)
@@ -533,13 +533,13 @@ def main():
         5. **Trend pasar** saat ini
         6. **Options/accessories** tambahan
         
-        **📌 Tips Negosiasi:**
+        ** Tips Negosiasi:**
         - Jika membeli: Start dari **Conservative Estimate**
         - Jika menjual: List di **Best Estimate** atau sedikit di atas
         """)
     
     st.success(f"""
-    ### ✅ Kredibilitas Model
+    ### Kredibilitas Model
     
     Model ini dilatih dengan:
     - **50,000+ data** mobil bekas real

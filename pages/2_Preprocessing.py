@@ -15,7 +15,7 @@ from modules.styles import hide_sidebar_nav
 st.set_page_config(
     layout='wide',
     page_title='Preprocessing - Car Price Prediction',
-    page_icon='🔧',
+    page_icon='',
     initial_sidebar_state='expanded'
 )
 
@@ -52,7 +52,7 @@ def main():
     Nav()
     hide_sidebar_nav()
     
-    st.title("🔧 Data Preprocessing")
+    st.title(" Data Preprocessing")
     st.markdown("Tahapan preprocessing data untuk mempersiapkan dataset sebelum proses modeling.")
     
     st.markdown("---")
@@ -63,10 +63,10 @@ def main():
     # ================================
     # SECTION 1: MISSING VALUES
     # ================================
-    st.header("1️⃣ Penanganan Missing Values")
+    st.header("1⃣ Penanganan Missing Values")
     
     st.markdown("""
-    ### 📝 Teori Missing Values
+    ### Teori Missing Values
     
     **Missing values** adalah nilai yang hilang atau tidak tercatat dalam dataset. Penanganan missing values sangat penting karena:
     
@@ -88,7 +88,7 @@ def main():
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("📊 Missing Values Analysis")
+        st.subheader(" Missing Values Analysis")
         missing_data = pd.DataFrame({
             'Column': df.columns,
             'Missing Count': df.isnull().sum().values,
@@ -97,7 +97,7 @@ def main():
         st.dataframe(missing_data, use_container_width=True)
     
     with col2:
-        st.subheader("📈 Visualisasi")
+        st.subheader(" Visualisasi")
         fig, ax = plt.subplots(figsize=(8, 5))
         ax.bar(df.columns, df.isnull().sum(), color='coral')
         ax.set_ylabel('Missing Count')
@@ -109,7 +109,7 @@ def main():
     total_missing = df.isnull().sum().sum()
     if total_missing == 0:
         st.success("""
-        ✅ **Tidak ada missing values** dalam dataset!
+         **Tidak ada missing values** dalam dataset!
         
         **Interpretasi:**
         - Dataset memiliki kualitas tinggi
@@ -118,17 +118,17 @@ def main():
         - Semua 50,001 records dapat digunakan untuk analisis
         """)
     else:
-        st.warning(f"⚠️ Total missing values: {total_missing}")
+        st.warning(f" Total missing values: {total_missing}")
     
     st.markdown("---")
     
     # ================================
     # SECTION 2: DUPLICATE CHECK
     # ================================
-    st.header("2️⃣ Penanganan Duplikat Data")
+    st.header("2⃣ Penanganan Duplikat Data")
     
     st.markdown("""
-    ### 📝 Mengapa Perlu Cek Duplikat?
+    ### Mengapa Perlu Cek Duplikat?
     
     Data duplikat dapat menyebabkan:
     - **Overfitting**: Model terlalu "menghafal" data yang sama
@@ -151,7 +151,7 @@ def main():
     
     if duplicate_count == 0:
         st.success("""
-        ✅ **Tidak ada data duplikat!**
+         **Tidak ada data duplikat!**
         
         **Interpretasi:**
         - Setiap record adalah transaksi mobil unik
@@ -159,17 +159,17 @@ def main():
         - Data quality: EXCELLENT
         """)
     else:
-        st.warning(f"⚠️ Ditemukan {duplicate_count} rows duplikat")
+        st.warning(f" Ditemukan {duplicate_count} rows duplikat")
     
     st.markdown("---")
     
     # ================================
     # SECTION 3: OUTLIER DETECTION
     # ================================
-    st.header("3️⃣ Deteksi & Penanganan Outlier")
+    st.header("3⃣ Deteksi & Penanganan Outlier")
     
     st.markdown("""
-    ### 📐 Metode IQR (Interquartile Range)
+    ### Metode IQR (Interquartile Range)
     
     IQR adalah metode statistik robust untuk mendeteksi outliers berdasarkan distribusi data.
     
@@ -231,7 +231,7 @@ def main():
                 st.metric("Outliers", f"{outlier_count:,} ({outlier_pct:.1f}%)")
             
             st.markdown(f"""
-            **📊 Statistik {col}:**
+            ** Statistik {col}:**
             - Lower Bound: **{lower:,.2f}**
             - Upper Bound: **{upper:,.2f}**
             - Data yang dianggap normal: [{lower:,.2f}, {upper:,.2f}]
@@ -257,28 +257,28 @@ def main():
             # Interpretation for each column
             if col == 'Price':
                 st.markdown("""
-                **💰 Interpretasi Outliers Price:**
+                ** Interpretasi Outliers Price:**
                 - Outliers tinggi (>Upper Bound) = Mobil luxury/premium (BMW, Porsche, dll)
                 - Outliers rendah (<Lower Bound) = Mobil sangat murah (mungkin rusak/salvage)
                 - **Keputusan**: Hapus outliers karena target variable → model lebih stabil
                 """)
             elif col == 'Mileage':
                 st.markdown("""
-                **🛣️ Interpretasi Outliers Mileage:**
+                ** Interpretasi Outliers Mileage:**
                 - High outliers (>200K mil) = Mobil komersial/taksi/rental
                 - Low outliers = Jarang (mileage 0 bukan outlier)
                 - **Keputusan**: Hati-hati menghapus, high mileage masih valid
                 """)
             elif col == 'Year of manufacture':
                 st.markdown("""
-                **📅 Interpretasi Outliers Year:**
+                ** Interpretasi Outliers Year:**
                 - Old cars (< ~1985) = Mobil klasik/antik
                 - New cars (2024) = Mobil terbaru, bukan outlier
                 - **Keputusan**: Mobil klasik mungkin memiliki pola pricing berbeda
                 """)
             elif col == 'Engine size':
                 st.markdown("""
-                **🔧 Interpretasi Outliers Engine Size:**
+                ** Interpretasi Outliers Engine Size:**
                 - Large engines (>4.5L) = Mobil sport/SUV mewah
                 - Small engines (<0.8L) = Mobil city car kecil
                 - **Keputusan**: Tetap pertahankan, variasi engine penting untuk segmentasi
@@ -289,10 +289,10 @@ def main():
     # ================================
     # SECTION 4: APPLY OUTLIER REMOVAL
     # ================================
-    st.header("4️⃣ Hasil Penghapusan Outlier (Price Only)")
+    st.header("4⃣ Hasil Penghapusan Outlier (Price Only)")
     
     st.markdown("""
-    ### 📝 Strategi Penghapusan
+    ### Strategi Penghapusan
     
     Berdasarkan analisis di atas, kita hanya menghapus outliers dari **Price** karena:
     
@@ -319,7 +319,7 @@ def main():
         st.metric("Data Dihapus", f"{removed:,} ({removed/len(df)*100:.1f}%)")
     
     st.success("""
-    **✅ Hasil Penghapusan Outliers:**
+    ** Hasil Penghapusan Outliers:**
     
     | Aspek | Sebelum | Sesudah |
     |-------|---------|---------|
@@ -338,10 +338,10 @@ def main():
     # ================================
     # SECTION 5: FEATURE ENGINEERING
     # ================================
-    st.header("5️⃣ Feature Engineering")
+    st.header("5⃣ Feature Engineering")
     
     st.markdown("""
-    ### 🔧 Membuat Fitur Baru
+    ### Membuat Fitur Baru
     
     Feature engineering adalah proses membuat fitur baru dari fitur existing untuk meningkatkan performa model.
     """)
@@ -355,7 +355,7 @@ def main():
     
     with col1:
         st.markdown("""
-        ### 📊 Fitur #1: Car_Age (Umur Mobil)
+        ### Fitur #1: Car_Age (Umur Mobil)
         
         **Formula:**
         $$\\text{Car Age} = 2024 - \\text{Year of Manufacture}$$
@@ -377,7 +377,7 @@ def main():
     
     with col2:
         st.markdown("""
-        ### 📊 Fitur #2: Mileage_per_Year
+        ### Fitur #2: Mileage_per_Year
         
         **Formula:**
         $$\\text{MPY} = \\frac{\\text{Total Mileage}}{\\text{Car Age} + 1}$$
@@ -407,10 +407,10 @@ def main():
     # ================================
     # SECTION 6: FEATURE ENCODING
     # ================================
-    st.header("6️⃣ Feature Encoding")
+    st.header("6⃣ Feature Encoding")
     
     st.markdown("""
-    ### 🏷️ Mengapa Perlu Encoding?
+    ### Mengapa Perlu Encoding?
     
     Machine Learning model hanya bisa memproses **angka**, bukan teks. Encoding mengubah kategori menjadi numerik.
     
@@ -422,7 +422,7 @@ def main():
     | **One-Hot Encoding** | Linear models, nominal data | Manufacturer → [0,1,0,0,...] |
     """)
     
-    st.subheader("🏷️ Label Encoding - Fuel Type")
+    st.subheader(" Label Encoding - Fuel Type")
     
     from sklearn.preprocessing import LabelEncoder
     
@@ -441,13 +441,13 @@ def main():
     
     with col2:
         st.markdown("""
-        **📐 Formula Label Encoding:**
+        ** Formula Label Encoding:**
         
         $$f: \\text{Category} \\rightarrow \\{0, 1, 2, ..., n-1\\}$$
         
         **Interpretasi:**
         - Diesel → 0
-        - Hybrid → 1  
+        - Hybrid → 1 
         - Petrol → 2
         
         **Catatan:**
@@ -457,7 +457,7 @@ def main():
     
     st.markdown("---")
     
-    st.subheader("🏭 One-Hot Encoding - Top 10 Manufacturers")
+    st.subheader(" One-Hot Encoding - Top 10 Manufacturers")
     
     top_manufacturers = df_clean['Manufacturer'].value_counts().head(10).index.tolist()
     
@@ -471,7 +471,7 @@ def main():
     
     with col2:
         st.markdown("""
-        **📐 Formula One-Hot Encoding:**
+        ** Formula One-Hot Encoding:**
         
         Untuk k kategori, buat k kolom biner:
         
@@ -500,10 +500,10 @@ def main():
     # ================================
     # SECTION 7: FEATURE SCALING
     # ================================
-    st.header("7️⃣ Feature Scaling (Standardization)")
+    st.header("7⃣ Feature Scaling (Standardization)")
     
     st.markdown("""
-    ### ⚖️ Mengapa Perlu Scaling?
+    ### Mengapa Perlu Scaling?
     
     Fitur memiliki range yang SANGAT berbeda:
     
@@ -518,7 +518,7 @@ def main():
     - Gradient descent tidak optimal
     - Regularization tidak fair
     
-    **📐 Formula Z-Score Standardization:**
+    ** Formula Z-Score Standardization:**
     
     $$z = \\frac{x - \\mu}{\\sigma}$$
     
@@ -532,12 +532,12 @@ def main():
     Untuk x = 1.6:
     z = (1.6 - 2.52) / 0.753
     z = -0.92 / 0.753
-    z = -1.222  ← Nilai negatif = di bawah mean
+    z = -1.222 ← Nilai negatif = di bawah mean
     
     Untuk x = 3.5:
     z = (3.5 - 2.52) / 0.753
     z = 0.98 / 0.753
-    z = 1.301  ← Nilai positif = di atas mean
+    z = 1.301 ← Nilai positif = di atas mean
     ```
     
     **Hasil setelah scaling:**
@@ -565,7 +565,7 @@ def main():
         st.dataframe(scaled_df.describe().round(2), use_container_width=True)
     
     st.success("""
-    **✅ Hasil Scaling:**
+    ** Hasil Scaling:**
     
     | Aspek | Sebelum | Sesudah |
     |-------|---------|---------|
@@ -584,21 +584,21 @@ def main():
     # ================================
     # SUMMARY
     # ================================
-    st.header("📋 Ringkasan Preprocessing Pipeline")
+    st.header(" Ringkasan Preprocessing Pipeline")
     
     st.success("""
-    ### ✅ Pipeline Preprocessing yang Diterapkan
+    ### Pipeline Preprocessing yang Diterapkan
     
     | Step | Proses | Hasil |
     |------|--------|-------|
-    | 1️⃣ | Missing Values Check | ✅ 0 missing (clean data) |
-    | 2️⃣ | Duplicate Check | ✅ 0 duplicates |
-    | 3️⃣ | Outlier Detection (IQR) | 📊 Detected & analyzed |
-    | 4️⃣ | Outlier Removal (Price) | 🧹 ~2,662 rows removed |
-    | 5️⃣ | Feature Engineering | 🔧 2 fitur baru (Car_Age, MPY) |
-    | 6️⃣ | Label Encoding | 🏷️ Fuel type → numeric |
-    | 7️⃣ | One-Hot Encoding | 🏭 Top 10 manufacturers |
-    | 8️⃣ | Standardization | ⚖️ Z-score normalization |
+    | 1⃣ | Missing Values Check | 0 missing (clean data) |
+    | 2⃣ | Duplicate Check | 0 duplicates |
+    | 3⃣ | Outlier Detection (IQR) | Detected & analyzed |
+    | 4⃣ | Outlier Removal (Price) | ~2,662 rows removed |
+    | 5⃣ | Feature Engineering | 2 fitur baru (Car_Age, MPY) |
+    | 6⃣ | Label Encoding | Fuel type → numeric |
+    | 7⃣ | One-Hot Encoding | Top 10 manufacturers |
+    | 8⃣ | Standardization | Z-score normalization |
     
     **Final Dataset:**
     - Records: ~47,339 (setelah outlier removal)
@@ -609,7 +609,7 @@ def main():
     """)
     
     st.info("""
-    **💡 Next Steps:**
+    ** Next Steps:**
     
     Lanjutkan ke halaman **Regression Analysis** untuk:
     1. Train-Test Split (80:20)

@@ -6,7 +6,7 @@ from modules.styles import hide_sidebar_nav
 st.set_page_config(
     layout='wide',
     page_title='Second Hand Car Price Prediction',
-    page_icon='🚗',
+    page_icon='',
     initial_sidebar_state='expanded'
 )
 
@@ -76,7 +76,7 @@ def main():
     # ================================
     # HERO SECTION
     # ================================
-    st.markdown('<h1 class="main-title">🚗 Second Hand Car Price Prediction</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-title"> Second Hand Car Price Prediction</h1>', unsafe_allow_html=True)
     st.markdown('<p class="subtitle">Prediksi Harga Mobil Bekas Menggunakan Machine Learning</p>', unsafe_allow_html=True)
     
     # Hero Image
@@ -89,21 +89,21 @@ def main():
     # ================================
     # PENGANTAR PENELITIAN
     # ================================
-    st.header("📖 Tentang Aplikasi")
+    st.header(" Tentang Aplikasi")
     
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown("""
-        ### 🎯 Latar Belakang
+        ### Latar Belakang
         
         **Pasar Mobil Bekas** adalah industri yang berkembang pesat dengan tantangan 
         utama dalam menentukan harga yang tepat.
         
         **Fakta Penting:**
-        - 🚗 **Jutaan** mobil bekas diperjualbelikan setiap tahun
-        - 💰 Harga dipengaruhi banyak faktor: umur, mileage, brand, dll
-        - 📉 Depresiasi mobil tidak linear - sulit diprediksi manual
+        - **Jutaan** mobil bekas diperjualbelikan setiap tahun
+        - Harga dipengaruhi banyak faktor: umur, mileage, brand, dll
+        - Depresiasi mobil tidak linear - sulit diprediksi manual
         - ⏰ Penetapan harga yang akurat sangat penting untuk profit
         
         Sistem prediksi otomatis berbasis Machine Learning dapat membantu 
@@ -112,22 +112,22 @@ def main():
     
     with col2:
         st.markdown("""
-        ### 🔬 Solusi yang Ditawarkan
+        ### Solusi yang Ditawarkan
         
         Sistem ini menggunakan **Gradient Boosting Regressor** untuk memprediksi 
         harga mobil bekas berdasarkan:
         
         | Fitur | Deskripsi |
         |-------|-----------|
-        | 📅 **Tahun Produksi** | Umur mobil (faktor dominan ~38%) |
-        | 🔧 **Engine Size** | Kapasitas mesin dalam liter |
-        | 🛣️ **Mileage** | Jarak tempuh dalam mil |
-        | ⛽ **Fuel Type** | Petrol, Diesel, atau Hybrid |
-        | 🏭 **Manufacturer** | Merek mobil |
+        | **Tahun Produksi** | Umur mobil (faktor dominan ~38%) |
+        | **Engine Size** | Kapasitas mesin dalam liter |
+        | **Mileage** | Jarak tempuh dalam mil |
+        | **Fuel Type** | Petrol, Diesel, atau Hybrid |
+        | **Manufacturer** | Merek mobil |
         
         **Performa Model:**
-        - ✅ R² Score: **96.9%**
-        - ✅ MAE: **$1,174** (error rata-rata)
+        - R² Score: **96.9%**
+        - MAE: **$1,174** (error rata-rata)
         """)
     
     st.markdown("---")
@@ -135,20 +135,20 @@ def main():
     # ================================
     # MODEL METRICS
     # ================================
-    st.header("📊 Performa Model")
+    st.header(" Performa Model")
     
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         st.metric(
-            label="🎯 R² Score",
+            label=" R² Score",
             value="96.9%",
             delta="Best Model"
         )
     
     with col2:
         st.metric(
-            label="📉 MAE",
+            label=" MAE",
             value="$1,174",
             delta="-64% vs Linear Reg",
             delta_color="inverse"
@@ -156,7 +156,7 @@ def main():
     
     with col3:
         st.metric(
-            label="📊 RMSE",
+            label=" RMSE",
             value="$1,847",
             delta="-57% vs Linear Reg",
             delta_color="inverse"
@@ -164,7 +164,7 @@ def main():
     
     with col4:
         st.metric(
-            label="📁 Dataset",
+            label=" Dataset",
             value="47,339",
             delta="Records"
         )
@@ -174,7 +174,7 @@ def main():
     # ================================
     # FEATURE IMPORTANCE
     # ================================
-    st.header("🎯 Faktor Penentu Harga")
+    st.header(" Faktor Penentu Harga")
     
     col1, col2 = st.columns(2)
     
@@ -182,16 +182,16 @@ def main():
         st.markdown("""
         | Rank | Faktor | Pengaruh |
         |------|--------|----------|
-        | 🥇 | **Umur Mobil** | 38.4% |
-        | 🥈 | **Tahun Produksi** | 36.3% |
-        | 🥉 | **Ukuran Mesin** | 12.9% |
+        | | **Umur Mobil** | 38.4% |
+        | | **Tahun Produksi** | 36.3% |
+        | | **Ukuran Mesin** | 12.9% |
         | 4 | **Jarak Tempuh** | 7.2% |
         | 5 | **Tipe Bahan Bakar** | 2.1% |
         """)
     
     with col2:
         st.info("""
-        **💡 Insight Utama:**
+        ** Insight Utama:**
         
         - **Depresiasi** adalah faktor dominan dalam penentuan harga
         - Mobil dengan **mileage rendah** per tahun memiliki nilai lebih tinggi
@@ -204,21 +204,21 @@ def main():
     # ================================
     # NAVIGATION GUIDE
     # ================================
-    st.header("🧭 Panduan Navigasi")
+    st.header(" Panduan Navigasi")
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
         st.markdown("""
         <div class="feature-card">
-        <h4>📊 EDA</h4>
+        <h4> EDA</h4>
         <p>Eksplorasi data: distribusi harga, korelasi, dan visualisasi</p>
         </div>
         """, unsafe_allow_html=True)
         
         st.markdown("""
         <div class="feature-card">
-        <h4>🔄 Preprocessing</h4>
+        <h4> Preprocessing</h4>
         <p>Proses cleaning data: missing values, outliers, encoding</p>
         </div>
         """, unsafe_allow_html=True)
@@ -226,14 +226,14 @@ def main():
     with col2:
         st.markdown("""
         <div class="feature-card">
-        <h4>🏗️ Model</h4>
+        <h4> Model</h4>
         <p>Arsitektur Gradient Boosting dan perbandingan model</p>
         </div>
         """, unsafe_allow_html=True)
         
         st.markdown("""
         <div class="feature-card">
-        <h4>📈 Evaluation</h4>
+        <h4> Evaluation</h4>
         <p>Metrik evaluasi: R², MAE, RMSE, dan visualisasi</p>
         </div>
         """, unsafe_allow_html=True)
@@ -241,14 +241,14 @@ def main():
     with col3:
         st.markdown("""
         <div class="feature-card">
-        <h4>🔍 Prediction</h4>
+        <h4> Prediction</h4>
         <p>Prediksi harga mobil bekas berdasarkan input user</p>
         </div>
         """, unsafe_allow_html=True)
         
         st.markdown("""
         <div class="feature-card">
-        <h4>📋 About</h4>
+        <h4> About</h4>
         <p>Informasi tentang project dan tim pengembang</p>
         </div>
         """, unsafe_allow_html=True)
@@ -258,8 +258,8 @@ def main():
     # Footer
     st.markdown("""
     <div style="text-align: center; color: #888; padding: 2rem;">
-        <p>🚗 Second Hand Car Price Prediction System</p>
-        <p>Built with ❤️ using Streamlit & Scikit-learn</p>
+        <p> Second Hand Car Price Prediction System</p>
+        <p>Built with using Streamlit & Scikit-learn</p>
     </div>
     """, unsafe_allow_html=True)
 
