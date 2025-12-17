@@ -29,22 +29,46 @@ def main():
     .subtitle {
         text-align: center;
         font-size: 1.3rem;
-        color: #666;
+        color: var(--text-color);
         margin-top: 0.5rem;
         margin-bottom: 2rem;
+        opacity: 0.8;
     }
     .feature-card {
-        background-color: #f8f9fa;
+        background: rgba(30, 136, 229, 0.1);
         border-radius: 10px;
         padding: 1.5rem;
         margin: 0.5rem 0;
         border-left: 4px solid #1E88E5;
+        border: 1px solid rgba(30, 136, 229, 0.3);
+    }
+    .feature-card h4 {
+        color: var(--text-color);
+        margin-top: 0;
+    }
+    .feature-card p {
+        color: var(--text-color);
+        opacity: 0.9;
+        margin-bottom: 0;
     }
     .metric-card {
-        background-color: #e3f2fd;
+        background: rgba(30, 136, 229, 0.15);
         border-radius: 10px;
         padding: 1rem;
         text-align: center;
+        border: 1px solid rgba(30, 136, 229, 0.3);
+    }
+    
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        .feature-card {
+            background: rgba(30, 136, 229, 0.15);
+            border: 1px solid rgba(30, 136, 229, 0.4);
+        }
+        .metric-card {
+            background: rgba(30, 136, 229, 0.2);
+            border: 1px solid rgba(30, 136, 229, 0.4);
+        }
     }
     </style>
     """, unsafe_allow_html=True)
