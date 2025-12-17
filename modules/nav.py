@@ -2,23 +2,23 @@ import streamlit as st
 
 
 def Home():
-    st.sidebar.page_link('app.py', label='Home', icon='🏠')
+    st.sidebar.page_link('app.py', label='Home')
 
 
 def EDA():
-    st.sidebar.page_link('pages/1_EDA.py', label='EDA', icon='📊')
+    st.sidebar.page_link('pages/1_EDA.py', label='EDA')
 
 
 def Preprocessing():
-    st.sidebar.page_link('pages/2_Preprocessing.py', label='Preprocessing', icon='🔧')
+    st.sidebar.page_link('pages/2_Preprocessing.py', label='Preprocessing')
 
 
 def Regression():
-    st.sidebar.page_link('pages/3_Regression.py', label='Regression Analysis', icon='🤖')
+    st.sidebar.page_link('pages/3_Regression.py', label='Regression Analysis')
 
 
 def Prediction():
-    st.sidebar.page_link('pages/4_Prediction.py', label='Prediction', icon='🔮')
+    st.sidebar.page_link('pages/4_Prediction.py', label='Prediction')
 
 
 def Nav():
@@ -26,7 +26,7 @@ def Nav():
     col1, col2, col3 = st.sidebar.columns(3)
     with col2:
         st.image("logo.png", width=150)
-    st.sidebar.title("🚗 Car Price Prediction")
+    st.sidebar.title("Car Price Prediction")
     st.sidebar.markdown("---")
     Home()
     EDA()
