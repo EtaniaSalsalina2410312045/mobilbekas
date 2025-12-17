@@ -104,7 +104,7 @@ def main():
         - **Jutaan** mobil bekas diperjualbelikan setiap tahun
         - Harga dipengaruhi banyak faktor: umur, mileage, brand, dll
         - Depresiasi mobil tidak linear - sulit diprediksi manual
-        - ⏰ Penetapan harga yang akurat sangat penting untuk profit
+        - Penetapan harga yang akurat sangat penting untuk profit
         
         Sistem prediksi otomatis berbasis Machine Learning dapat membantu 
         dealer dan pembeli menentukan harga yang fair.
