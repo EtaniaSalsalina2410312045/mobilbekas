@@ -90,7 +90,7 @@ def main():
         st.markdown("""
         ### 🔬 Solusi yang Ditawarkan
         
-        Sistem ini menggunakan **Random Forest Regressor** untuk memprediksi 
+        Sistem ini menggunakan **Gradient Boosting Regressor** untuk memprediksi 
         harga mobil bekas berdasarkan:
         
         | Fitur | Deskripsi |
@@ -102,8 +102,8 @@ def main():
         | 🏭 **Manufacturer** | Merek mobil |
         
         **Performa Model:**
-        - ✅ R² Score: **97.6%**
-        - ✅ MAE: **$848** (error rata-rata)
+        - ✅ R² Score: **96.9%**
+        - ✅ MAE: **$1,174** (error rata-rata)
         """)
     
     st.markdown("---")
@@ -118,23 +118,23 @@ def main():
     with col1:
         st.metric(
             label="🎯 R² Score",
-            value="97.6%",
+            value="96.9%",
             delta="Best Model"
         )
     
     with col2:
         st.metric(
             label="📉 MAE",
-            value="$848",
-            delta="-74% vs Linear Reg",
+            value="$1,174",
+            delta="-64% vs Linear Reg",
             delta_color="inverse"
         )
     
     with col3:
         st.metric(
             label="📊 RMSE",
-            value="$1,597",
-            delta="-63% vs Linear Reg",
+            value="$1,847",
+            delta="-57% vs Linear Reg",
             delta_color="inverse"
         )
     
@@ -203,7 +203,7 @@ def main():
         st.markdown("""
         <div class="feature-card">
         <h4>🏗️ Model</h4>
-        <p>Arsitektur Random Forest dan perbandingan model</p>
+        <p>Arsitektur Gradient Boosting dan perbandingan model</p>
         </div>
         """, unsafe_allow_html=True)
         
