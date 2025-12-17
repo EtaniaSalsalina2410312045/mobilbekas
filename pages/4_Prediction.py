@@ -22,7 +22,8 @@ st.set_page_config(
 @st.cache_resource
 def load_all_models():
     """Load all saved models and preprocessors"""
-    with open('models/random_forest_model.pkl', 'rb') as f:
+    # Load Gradient Boosting model
+    with open('models/best_model.pkl', 'rb') as f:
         model = pickle.load(f)
     with open('models/scaler.pkl', 'rb') as f:
         scaler = pickle.load(f)
@@ -115,7 +116,7 @@ def main():
     hide_sidebar_nav()
     
     st.title("🔮 Car Price Prediction")
-    st.markdown("Prediksi harga mobil bekas berdasarkan spesifikasi menggunakan model **Random Forest** yang telah di-training.")
+    st.markdown("Prediksi harga mobil bekas berdasarkan spesifikasi menggunakan model **Gradient Boosting** yang telah di-training.")
     
     st.markdown("---")
     
@@ -141,7 +142,7 @@ def main():
         ```
         ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
         │  1. Input User   │ →   │  2. Feature      │ →   │  3. Scaling      │ →   │  4. Prediction   │
-        │  (Year, Mileage, │     │  Engineering     │     │  (StandardScaler)│     │  (Random Forest) │
+        │  (Year, Mileage, │     │  Engineering     │     │  (StandardScaler)│     │  (Grad Boosting) │
         │  Engine, etc.)   │     │  (Age, MPY, etc.)│     │                  │     │                  │
         └──────────────────┘     └──────────────────┘     └──────────────────┘     └──────────────────┘
         ```
@@ -163,12 +164,13 @@ def main():
         - Gunakan mean (μ) dan std (σ) dari training data
         - Normalize semua fitur numerik ke range standar
         
-        **Step 4: Random Forest Prediction**
+        **Step 4: Gradient Boosting Prediction**
         
-        $$\\hat{Price} = \\frac{1}{N} \\sum_{i=1}^{N} Tree_i(X_{scaled})$$
+        $$\hat{Price} = \sum_{i=1}^{N} \alpha_i \cdot Tree_i(X_{scaled})$$
         
-        - 100 Decision Trees memberikan prediksi masing-masing
-        - Prediksi final = rata-rata dari semua trees
+        - 100 trees dibangun secara sequential (bukan parallel)
+        - Setiap tree memperbaiki error dari tree sebelumnya
+        - Prediksi final = weighted sum dari semua trees
         """)
     
     # ================================
@@ -179,7 +181,7 @@ def main():
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.metric("Model", "Random Forest", help="Best performing model dari 4 yang diuji")
+        st.metric("Model", "Gradient Boosting", help="Best performing model dari 4 yang diuji")
     with col2:
         st.metric("R² Score", f"{metrics['r2_score']:.4f}", help="Akurasi model (1.0 = sempurna)")
     with col3:
@@ -192,9 +194,9 @@ def main():
     
     | Metrik | Nilai | Artinya |
     |--------|-------|---------|
-    | **R² Score** | 0.9759 | Model menjelaskan 97.59% variasi harga |
-    | **MAE** | ~$848 | Rata-rata, prediksi meleset ~$848 dari harga aktual |
-    | **Accuracy** | Excellent | Top 2.5% model untuk prediksi harga mobil |
+    | **R² Score** | 0.9695 | Model menjelaskan 96.95% variasi harga |
+    | **MAE** | ~$1,174 | Rata-rata, prediksi meleset ~$1,174 dari harga aktual |
+    | **Accuracy** | Excellent | Model sangat baik untuk prediksi harga mobil |
     """)
     
     st.markdown("---")
@@ -309,7 +311,7 @@ def main():
         predict_button = st.button("🔮 Predict Price", type="primary", use_container_width=True)
     
     if predict_button:
-        with st.spinner("🔄 Calculating prediction using Random Forest model..."):
+        with st.spinner("🔄 Calculating prediction using Gradient Boosting model..."):
             # Make prediction
             predicted_price = predict_price(
                 model, scaler, le_fuel, feature_cols, top_manufacturers,
@@ -434,7 +436,7 @@ def main():
             st.markdown("""
             **📈 Feature Importance (dari model):**
             
-            Berdasarkan analisis Random Forest:
+            Berdasarkan analisis Gradient Boosting:
             
             1. **Year of Manufacture** (~35-40%)
                - Faktor #1 penentu harga
@@ -543,7 +545,7 @@ def main():
     - **50,000+ data** mobil bekas real
     - **Akurasi {metrics['r2_score']*100:.2f}%** (R² Score)
     - **Error rata-rata ${metrics['mae']:,.0f}** (MAE)
-    - **Random Forest** dengan 100 decision trees
+    - **Gradient Boosting** dengan 100 sequential trees
     
     Gunakan prediksi ini sebagai panduan awal yang reliable dalam transaksi mobil bekas!
     """)
